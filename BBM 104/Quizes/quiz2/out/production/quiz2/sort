@@ -1,0 +1,24 @@
+static Trip[] sortDeparture(Trip[] trips) {
+        ArrayList<String> departureTimes = new ArrayList<>();
+        Trip[] DepartureSorted = new Trip[trips.length];
+        for (Trip trip : trips) {
+            if(trip != null ) {
+                departureTimes.add(trip.getDepartureTimeStr());
+            }
+        }
+        Collections.sort(departureTimes);
+        for(int i =0; i< departureTimes.size() && departureTimes.get(i) != null; i++) {
+            for(int j = 0; trips[j] != null; j++) {
+                if(Objects.equals(departureTimes.get(i), trips[j].getDepartureTimeStr()) && !Arrays.asList(DepartureSorted).contains(trips[j])) {
+                    DepartureSorted[i] = trips[j];
+                    for(int k = 0; k < departureTimes.size(); k++){
+                        if(Objects.equals(trips[j].getDepartureTimeStr(), trips[k].getDepartureTimeStr()) && k!=j) {
+                            trips[j].setState("DELAYED");
+                            trips[k].setState("DELAYED");
+                        }
+                    }break;
+                }
+            }
+        }
+        return(DepartureSorted);
+    }
