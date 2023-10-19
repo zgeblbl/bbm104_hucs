@@ -1,2 +1,0 @@
-The input file should not be empty
-There should be an input file in the specified path
